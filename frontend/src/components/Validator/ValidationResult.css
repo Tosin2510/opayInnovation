@@ -1,0 +1,292 @@
+/* ============================================
+   MsgShield — Validation Result
+   Glassmorphism result cards with state glows
+   ============================================ */
+
+.validation-result {
+  width: 100%;
+  max-width: 640px;
+  margin-top: 32px;
+}
+
+/* ---------- Scanning / Loading ---------- */
+
+.validation-result__scanning {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 32px 24px;
+  text-align: center;
+  animation: resultFadeIn 0.4s ease-out;
+}
+
+.validation-result__scan-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+  animation: scanPulse 1.2s ease-in-out infinite;
+}
+
+.validation-result__scan-text {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  color: #6ee7b7;
+  margin-bottom: 20px;
+  letter-spacing: 0.3px;
+}
+
+.validation-result__progress-track {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.validation-result__progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #10b981, #84cc16);
+  border-radius: 4px;
+  animation: progressSweep 1.5s ease-in-out forwards;
+}
+
+@keyframes progressSweep {
+  0% {
+    width: 0%;
+  }
+  30% {
+    width: 45%;
+  }
+  60% {
+    width: 72%;
+  }
+  85% {
+    width: 90%;
+  }
+  100% {
+    width: 98%;
+  }
+}
+
+@keyframes scanPulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* ---------- Result Card (shared) ---------- */
+
+.validation-result__card {
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 32px 28px;
+  animation: resultEnter 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+  transform: scale(0.92);
+}
+
+@keyframes resultEnter {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes resultFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Success State ---------- */
+
+.validation-result__card--success {
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.1),
+    inset 0 1px 0 rgba(16, 185, 129, 0.1);
+}
+
+/* ---------- Failure State ---------- */
+
+.validation-result__card--failure {
+  background: rgba(239, 68, 68, 0.06);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  box-shadow: 0 0 40px rgba(239, 68, 68, 0.1),
+    inset 0 1px 0 rgba(239, 68, 68, 0.1);
+}
+
+/* ---------- Error State ---------- */
+
+.validation-result__card--error {
+  background: rgba(251, 191, 36, 0.06);
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.06),
+    inset 0 1px 0 rgba(251, 191, 36, 0.08);
+}
+
+/* ---------- Shield Icon ---------- */
+
+.validation-result__shield {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.validation-result__shield--success {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  box-shadow: 0 0 24px rgba(16, 185, 129, 0.2);
+}
+
+.validation-result__shield--failure {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  box-shadow: 0 0 24px rgba(239, 68, 68, 0.2);
+}
+
+.validation-result__shield--error {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+  box-shadow: 0 0 24px rgba(251, 191, 36, 0.15);
+}
+
+/* ---------- Typography ---------- */
+
+.validation-result__heading {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  text-align: center;
+}
+
+.validation-result__heading--success {
+  color: #34d399;
+}
+
+.validation-result__heading--failure {
+  color: #f87171;
+}
+
+.validation-result__heading--error {
+  color: #fcd34d;
+}
+
+.validation-result__status-label {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.validation-result__status-label--success {
+  color: rgba(52, 211, 153, 0.6);
+}
+
+.validation-result__status-label--failure {
+  color: rgba(248, 113, 113, 0.6);
+}
+
+/* ---------- Details Grid ---------- */
+
+.validation-result__details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.validation-result__detail-item {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 12px 14px;
+  text-align: left;
+}
+
+.validation-result__detail-label {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 4px;
+}
+
+.validation-result__detail-value {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+/* ---------- Reason (failure) ---------- */
+
+.validation-result__reason {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: rgba(239, 68, 68, 0.08);
+  border-radius: 10px;
+  border-left: 3px solid rgba(239, 68, 68, 0.5);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  color: rgba(248, 113, 113, 0.85);
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* ---------- Error message ---------- */
+
+.validation-result__error-msg {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+  color: rgba(252, 211, 77, 0.85);
+  text-align: center;
+  line-height: 1.6;
+  margin-top: 4px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 680px) {
+  .validation-result__card {
+    padding: 24px 18px;
+  }
+
+  .validation-result__details {
+    grid-template-columns: 1fr;
+  }
+
+  .validation-result__heading {
+    font-size: 18px;
+  }
+
+  .validation-result__shield {
+    width: 52px;
+    height: 52px;
+    font-size: 22px;
+  }
+}

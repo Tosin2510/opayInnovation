@@ -1,0 +1,202 @@
+/* ============================================
+   MsgShield — How It Works Section
+   Numbered step cards · Glassmorphism
+   ============================================ */
+
+.how-it-works {
+  padding: 80px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ---------- Header ---------- */
+
+.how-it-works__title {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin: 0 0 8px;
+  background: linear-gradient(135deg, #10b981 0%, #84cc16 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.how-it-works__subtitle {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0 0 48px;
+  max-width: 480px;
+  line-height: 1.6;
+}
+
+/* ---------- Cards Grid ---------- */
+
+.how-it-works__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 960px;
+  width: 100%;
+}
+
+/* ---------- Single Card ---------- */
+
+.how-it-works__card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 32px 24px 28px;
+  overflow: hidden;
+  transition: transform 0.35s ease, border-color 0.35s ease,
+    box-shadow 0.35s ease;
+
+  /* Stagger entrance — initial state */
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+.how-it-works__card.is-visible {
+  animation: stepEnter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.how-it-works__card:nth-child(2).is-visible {
+  animation-delay: 0.12s;
+}
+
+.how-it-works__card:nth-child(3).is-visible {
+  animation-delay: 0.24s;
+}
+
+@keyframes stepEnter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.how-it-works__card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(16, 185, 129, 0.2);
+  box-shadow: 0 12px 40px rgba(16, 185, 129, 0.08);
+}
+
+/* Watermark number */
+.how-it-works__watermark {
+  position: absolute;
+  top: -8px;
+  right: -4px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 100px;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.025);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.how-it-works__card-icon {
+  font-size: 32px;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.how-it-works__card-title {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin: 0 0 8px;
+}
+
+.how-it-works__card-desc {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ---------- Step number badge ---------- */
+
+.how-it-works__step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(132, 204, 22, 0.2));
+  color: #6ee7b7;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+/* ---------- Security Note ---------- */
+
+.how-it-works__note {
+  margin-top: 48px;
+  max-width: 640px;
+  width: 100%;
+  padding: 18px 24px;
+  border-radius: 12px;
+  border: 1px solid rgba(16, 185, 129, 0.12);
+  background: rgba(16, 185, 129, 0.04);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.how-it-works__note-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.how-it-works__note-text {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 768px) {
+  .how-it-works {
+    padding: 56px 16px;
+  }
+
+  .how-it-works__title {
+    font-size: 28px;
+  }
+
+  .how-it-works__cards {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+  }
+
+  .how-it-works__watermark {
+    font-size: 72px;
+  }
+
+  .how-it-works__note {
+    padding: 14px 16px;
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .how-it-works__note-text {
+    text-align: center;
+  }
+}

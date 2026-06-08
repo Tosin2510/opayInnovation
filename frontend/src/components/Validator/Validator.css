@@ -1,0 +1,238 @@
+/* ============================================
+   MsgShield — Validator Section
+   Dark glassmorphism · Cybersecurity aesthetic
+   ============================================ */
+
+.validator {
+  padding: 80px 24px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* ---------- Header ---------- */
+
+.validator__title {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 42px;
+  font-weight: 800;
+  letter-spacing: -1.2px;
+  margin: 0 0 12px;
+  background: linear-gradient(135deg, #10b981 0%, #84cc16 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.validator__subtitle {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0 0 40px;
+  max-width: 520px;
+  line-height: 1.6;
+}
+
+/* ---------- Textarea Card ---------- */
+
+.validator__card {
+  width: 100%;
+  max-width: 640px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  padding: 24px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.validator__card:focus-within {
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.08);
+}
+
+.validator__textarea {
+  width: 100%;
+  min-height: 180px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  color: #e2e8f0;
+  font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  font-size: 13.5px;
+  line-height: 1.7;
+  padding: 16px;
+  resize: vertical;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.validator__textarea::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 14px;
+}
+
+.validator__textarea:focus {
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+/* ---------- Demo Buttons Row ---------- */
+
+.validator__demos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.validator__demo-btn {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  letter-spacing: 0.2px;
+}
+
+.validator__demo-btn:hover {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.35);
+  color: #6ee7b7;
+  transform: translateY(-1px);
+}
+
+.validator__demo-btn:active {
+  transform: translateY(0);
+}
+
+/* ---------- Verify Button ---------- */
+
+.validator__verify-btn {
+  margin-top: 28px;
+  width: 100%;
+  max-width: 640px;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #10b981 0%, #84cc16 100%);
+  box-shadow: 0 4px 24px rgba(16, 185, 129, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  animation: verifyPulse 3s ease-in-out infinite;
+}
+
+.validator__verify-btn:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 8px 36px rgba(16, 185, 129, 0.45);
+  animation: none;
+}
+
+.validator__verify-btn:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.validator__verify-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  animation: none;
+  transform: none;
+}
+
+/* Shimmer sweep on hover */
+.validator__verify-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 100%
+  );
+  transition: left 0.6s ease;
+}
+
+.validator__verify-btn:hover::after {
+  left: 100%;
+}
+
+@keyframes verifyPulse {
+  0%,
+  100% {
+    box-shadow: 0 4px 24px rgba(16, 185, 129, 0.25);
+  }
+  50% {
+    box-shadow: 0 4px 36px rgba(16, 185, 129, 0.45),
+      0 0 60px rgba(132, 204, 22, 0.12);
+  }
+}
+
+/* ---------- Error inline ---------- */
+
+.validator__error {
+  margin-top: 12px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  color: #f87171;
+  max-width: 640px;
+  text-align: center;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 680px) {
+  .validator {
+    padding: 56px 16px 40px;
+  }
+
+  .validator__title {
+    font-size: 30px;
+  }
+
+  .validator__subtitle {
+    font-size: 14px;
+  }
+
+  .validator__card {
+    padding: 16px;
+  }
+
+  .validator__textarea {
+    min-height: 140px;
+    font-size: 12px;
+  }
+
+  .validator__demos {
+    gap: 6px;
+  }
+
+  .validator__demo-btn {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+
+  .validator__verify-btn {
+    font-size: 14px;
+    padding: 14px 24px;
+  }
+}

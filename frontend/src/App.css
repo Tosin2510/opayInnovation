@@ -1,0 +1,49 @@
+/* ========================================
+   APP — Layout & Structural Styles
+   ======================================== */
+
+.app {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-content {
+  flex: 1;
+  padding-top: var(--navbar-height);
+}
+
+/* Page section separator */
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--glass-border) 20%,
+    var(--color-green) 50%,
+    var(--glass-border) 80%,
+    transparent 100%
+  );
+  opacity: 0.5;
+  margin: 0;
+  border: none;
+}
+
+/* Skip to content (a11y) */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-blue);
+  color: white;
+  border-radius: var(--border-radius-sm);
+  z-index: var(--z-toast);
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: var(--space-md);
+}
