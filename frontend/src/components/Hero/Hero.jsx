@@ -7,7 +7,7 @@ const STATS = [
   { value: '99.9%', label: 'Accuracy' },
 ];
 
-export default function Hero() {
+export default function Hero({ onSignupClick }) {
   const statsRef = useRef(null);
 
   useEffect(() => {
@@ -83,11 +83,15 @@ export default function Hero() {
         </p>
 
         <div className="hero__actions">
-          <a href="#validator" className="hero__btn hero__btn--primary">
+          <button
+            type="button"
+            className="hero__btn hero__btn--primary"
+            onClick={onSignupClick}
+          >
+            Sign Up Free
+          </button>
+          <a href="#validator" className="hero__btn hero__btn--outline">
             Start Verifying
-          </a>
-          <a href="#how-it-works" className="hero__btn hero__btn--outline">
-            Learn How It Works
           </a>
         </div>
       </div>

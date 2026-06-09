@@ -7,7 +7,7 @@ const NAV_LINKS = [
   { label: 'How It Works', href: '#how-it-works' },
 ];
 
-export default function Navbar() {
+export default function Navbar({ onSignupClick }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
@@ -58,6 +58,15 @@ export default function Navbar() {
               </a>
             </li>
           ))}
+          <li>
+            <button
+              className="navbar__cta"
+              onClick={onSignupClick}
+              type="button"
+            >
+              Sign Up
+            </button>
+          </li>
         </ul>
 
         {/* Hamburger toggle */}
@@ -79,7 +88,7 @@ export default function Navbar() {
         id="mobile-menu"
         className={`navbar__mobile-menu ${isMobileOpen ? 'navbar__mobile-menu--open' : ''}`}
       >
-        {NAV_LINKS.map(({ label, href }) => (
+          {NAV_LINKS.map(({ label, href }) => (
           <li key={href}>
             <a
               href={href}
@@ -90,7 +99,16 @@ export default function Navbar() {
             </a>
           </li>
         ))}
-      </ul>
+          <li>
+            <button
+              className="navbar__mobile-cta"
+              onClick={() => { setIsMobileOpen(false); onSignupClick(); }}
+              type="button"
+            >
+              Sign Up
+            </button>
+          </li>
+        </ul>
     </nav>
   );
 }
