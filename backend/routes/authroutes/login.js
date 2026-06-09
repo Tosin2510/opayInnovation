@@ -1,5 +1,5 @@
 import bycrypt from 'bcryptjs';
-import User from '../../models/user.model';
+import User from '../../models/user.model.js';
 const router=express.Router();
 
 router.post('/login',async(req,res)=>{
