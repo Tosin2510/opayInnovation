@@ -8,8 +8,8 @@ app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(router,'/user')
-app.use(bankRouter, "/bank")
+app.use("/user", router)
+app.use("/bank", bankRouter)
 // Routes
 app.get("/", (req, res) => {
   res.json({
