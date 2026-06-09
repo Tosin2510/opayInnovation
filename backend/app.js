@@ -1,6 +1,6 @@
 import express from "express";
-import bankRouter from "./routes/bankroutes/auth.js";
-import router from "./routes/authroutes/login.js";
+import bankRouter from "./routes/bankroutes/auth";
+import router from "./routes/authroutes/login";
 const app = express();
 
 // Middleware
