@@ -18,7 +18,7 @@ router.post('/login',async(req,res)=>{
             return res.status(400).json({ message: 'Invalid credentials' });
         }
     }catch(err){
-
+        res.status(500).json({message:'internal server error'})
     }
 })
 
@@ -52,7 +52,7 @@ router.post('/register',async(req,res)=>{
         });
 
     }catch(err){
-        res.status(500).json({message: `Server error`, error:error.message})
+        res.status(500).json({message: `Server error from register`})
     }
 })
 export default router
