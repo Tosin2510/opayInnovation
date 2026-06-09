@@ -1,10 +1,10 @@
 import express from "express";
 import Bank from "../models/bank.model.js";
 
-const router = express.Router();
+const bankRouter = express.Router();
 
 // Login Bank
-router.post("/login", async (req, res) => {
+bankRouter.post("/login", async (req, res) => {
   try {
     const { bankKey } = req.body;
 
@@ -42,7 +42,7 @@ router.post("/login", async (req, res) => {
 });
 
 // Get all banks
-router.get("/", async (req, res) => {
+router.get("/get", async (req, res) => {
   try {
     const banks = await Bank.find();
 
@@ -58,4 +58,4 @@ router.get("/", async (req, res) => {
   }
 });
 
-export default router;
+export default bankRouter;
