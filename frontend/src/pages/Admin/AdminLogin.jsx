@@ -4,7 +4,7 @@ import './AdminLogin.css';
 const API_BASE = 'https://opayinnovation.onrender.com';
 
 export default function AdminLogin({ onAuthenticated }) {
-  const [bankKey, setBankKey] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [shake, setShake] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -19,8 +19,8 @@ export default function AdminLogin({ onAuthenticated }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!bankKey.trim()) {
-      triggerError('Please enter your bank key.');
+    if (!password.trim()) {
+      triggerError('Please enter the admin key.');
       return;
     }
 
@@ -31,7 +31,7 @@ export default function AdminLogin({ onAuthenticated }) {
       const res = await fetch(`${API_BASE}/bank/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ bankKey }),
+        body: JSON.stringify({ password }),
       });
 
       const data = await res.json().catch(() => ({}));
@@ -44,7 +44,7 @@ export default function AdminLogin({ onAuthenticated }) {
         );
         onAuthenticated();
       } else {
-        triggerError(data.message || 'Invalid bank key. Access denied.');
+        triggerError(data.message || 'Invalid admin key. Access denied.');
       }
     } catch {
       triggerError('Cannot reach server. Please try again.');
@@ -65,18 +65,18 @@ export default function AdminLogin({ onAuthenticated }) {
         className={`admin-login__card ${shake ? 'admin-login__card--shake' : ''}`}
         onSubmit={handleSubmit}
       >
-        <div className="admin-login__icon">🏦</div>
-        <h1 className="admin-login__title">Bank Manager Access</h1>
-        <p className="admin-login__subtitle">Enter your private bank key to access your dashboard</p>
+        <div className="admin-login__icon">🛡️</div>
+        <h1 className="admin-login__title">MsgShield Bank</h1>
+        <p className="admin-login__subtitle">Admin Dashboard Access</p>
 
         <div className="admin-login__field">
           <input
             ref={inputRef}
             type="password"
             className={`admin-login__input ${error ? 'has-error' : ''}`}
-            placeholder="Enter your private bank key"
-            value={bankKey}
-            onChange={(e) => { setBankKey(e.target.value); setError(''); }}
+            placeholder="Enter admin key"
+            value={password}
+            onChange={(e) => { setPassword(e.target.value); setError(''); }}
             autoFocus
             disabled={isLoading}
           />

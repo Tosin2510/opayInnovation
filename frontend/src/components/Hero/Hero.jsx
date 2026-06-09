@@ -7,7 +7,7 @@ const STATS = [
   { value: '99.9%', label: 'Accuracy' },
 ];
 
-export default function Hero({ onSignupClick }) {
+export default function Hero({ onSignupClick, onLoginClick, isAuth }) {
   const statsRef = useRef(null);
 
   useEffect(() => {
@@ -83,16 +83,28 @@ export default function Hero({ onSignupClick }) {
         </p>
 
         <div className="hero__actions">
-          <button
-            type="button"
-            className="hero__btn hero__btn--primary"
-            onClick={onSignupClick}
-          >
-            Sign Up Free
-          </button>
-          <a href="#validator" className="hero__btn hero__btn--outline">
-            Start Verifying
-          </a>
+          {!isAuth && (
+            <button
+              type="button"
+              className="hero__btn hero__btn--primary"
+              onClick={onSignupClick}
+            >
+              Sign Up Free
+            </button>
+          )}
+          {isAuth ? (
+            <a href="/validator" className="hero__btn hero__btn--primary">
+              Open Validator
+            </a>
+          ) : (
+            <button
+              type="button"
+              className="hero__btn hero__btn--outline"
+              onClick={onLoginClick}
+            >
+              Start Verifying
+            </button>
+          )}
         </div>
       </div>
 

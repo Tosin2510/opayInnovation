@@ -1,0 +1,39 @@
+.validator-page__content {
+  padding-top: 120px; /* Space for navbar */
+  min-height: calc(100vh - 100px);
+}
+
+.validator-page__header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.validator-page__title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #f8fafc;
+  margin: 0 0 12px 0;
+}
+
+.validator-page__username {
+  background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.validator-page__desc {
+  color: #94a3b8;
+  font-size: 18px;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .validator-page__content {
+    padding-top: 100px;
+  }
+  
+  .validator-page__title {
+    font-size: 28px;
+  }
+}

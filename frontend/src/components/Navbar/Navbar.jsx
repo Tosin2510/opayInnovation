@@ -7,7 +7,7 @@ const NAV_LINKS = [
   { label: 'How It Works', href: '#how-it-works' },
 ];
 
-export default function Navbar({ onSignupClick }) {
+export default function Navbar({ onSignupClick, onLoginClick, isAuth, onLogout }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
@@ -58,15 +58,43 @@ export default function Navbar({ onSignupClick }) {
               </a>
             </li>
           ))}
-          <li>
-            <button
-              className="navbar__cta"
-              onClick={onSignupClick}
-              type="button"
-            >
-              Sign Up
-            </button>
-          </li>
+          {isAuth ? (
+            <>
+              <li>
+                <a href="/validator" className="navbar__link">Validator Dashboard</a>
+              </li>
+              <li>
+                <button
+                  className="navbar__cta navbar__cta--outline"
+                  onClick={onLogout}
+                  type="button"
+                >
+                  Log Out
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <button
+                  className="navbar__link"
+                  onClick={onLoginClick}
+                  type="button"
+                >
+                  Log In
+                </button>
+              </li>
+              <li>
+                <button
+                  className="navbar__cta"
+                  onClick={onSignupClick}
+                  type="button"
+                >
+                  Sign Up
+                </button>
+              </li>
+            </>
+          )}
         </ul>
 
         {/* Hamburger toggle */}
@@ -99,15 +127,44 @@ export default function Navbar({ onSignupClick }) {
             </a>
           </li>
         ))}
-          <li>
-            <button
-              className="navbar__mobile-cta"
-              onClick={() => { setIsMobileOpen(false); onSignupClick(); }}
-              type="button"
-            >
-              Sign Up
-            </button>
-          </li>
+          {isAuth ? (
+            <>
+              <li>
+                <a href="/validator" className="navbar__mobile-link">Validator Dashboard</a>
+              </li>
+              <li>
+                <button
+                  className="navbar__mobile-cta navbar__mobile-cta--outline"
+                  onClick={() => { setIsMobileOpen(false); onLogout(); }}
+                  type="button"
+                >
+                  Log Out
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <button
+                  className="navbar__mobile-link"
+                  onClick={() => { setIsMobileOpen(false); onLoginClick(); }}
+                  type="button"
+                  style={{ width: '100%', textAlign: 'left', padding: '16px', background: 'transparent', border: 'none', color: '#f8fafc', fontSize: '18px', fontWeight: '500' }}
+                >
+                  Log In
+                </button>
+              </li>
+              <li>
+                <button
+                  className="navbar__mobile-cta"
+                  onClick={() => { setIsMobileOpen(false); onSignupClick(); }}
+                  type="button"
+                >
+                  Sign Up
+                </button>
+              </li>
+            </>
+          )}
         </ul>
     </nav>
   );

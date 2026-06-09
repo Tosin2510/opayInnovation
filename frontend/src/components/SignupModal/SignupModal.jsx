@@ -1,20 +1,8 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './SignupModal.css';
 
 const TOTAL_STEPS = 4;
-
-/**
- * Generate a unique customer ID:  MS-XXXXXXXXXX
- * (MS = MsgShield, 10 alphanumeric chars)
- */
-function generateCustomerId() {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let id = 'MS-';
-  for (let i = 0; i < 10; i++) {
-    id += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return id;
-}
 
 /**
  * SignupModal — multi-step signup wizard.
@@ -31,7 +19,6 @@ export default function SignupModal({ isOpen, onClose }) {
     email: '',
     password: '',
     confirmPassword: '',
-    customerId: '',
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -40,6 +27,7 @@ export default function SignupModal({ isOpen, onClose }) {
 
   const modalRef = useRef(null);
   const inputRef = useRef(null);
+  const navigate = useNavigate();
 
   // Focus first input when step changes
   useEffect(() => {
@@ -75,7 +63,6 @@ export default function SignupModal({ isOpen, onClose }) {
         setDirection('forward');
         setFormData({
           username: '', email: '', password: '', confirmPassword: '',
-          customerId: '',
         });
         setErrors({});
         setSubmitResult(null);
@@ -139,14 +126,6 @@ export default function SignupModal({ isOpen, onClose }) {
   const goNext = useCallback(() => {
     if (!validateStep()) return;
 
-    // Generate customerId when moving to step 4 (review)
-    if (step === 3) {
-      setFormData((prev) => ({
-        ...prev,
-        customerId: prev.customerId || generateCustomerId(),
-      }));
-    }
-
     setDirection('forward');
     setStep((s) => Math.min(s + 1, TOTAL_STEPS));
   }, [step, validateStep]);
@@ -166,12 +145,11 @@ export default function SignupModal({ isOpen, onClose }) {
       username: formData.username.trim(),
       email: formData.email.trim().toLowerCase(),
       password: formData.password,
-      customerId: formData.customerId,
     };
 
     try {
       const API_BASE = 'https://opayinnovation.onrender.com';
-      const res = await fetch(`${API_BASE}/register`, {
+      const res = await fetch(`${API_BASE}/user/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -182,7 +160,20 @@ export default function SignupModal({ isOpen, onClose }) {
         throw new Error(data.message || `Server responded with ${res.status}`);
       }
 
+      // Store auth session automatically upon successful signup
+      sessionStorage.setItem(
+        'msgshield_customer',
+        JSON.stringify({ authenticated: true, email: formData.email.trim().toLowerCase(), username: formData.username.trim() })
+      );
+
       setSubmitResult('success');
+      
+      // Auto-redirect to validator after short delay
+      setTimeout(() => {
+        onClose();
+        navigate('/validator');
+      }, 1500);
+
     } catch (err) {
       setSubmitError(err.message || 'Failed to connect to server');
       setSubmitResult('error');
@@ -372,7 +363,7 @@ export default function SignupModal({ isOpen, onClose }) {
               <h2 className="signup-modal__title">Account Created!</h2>
               <p className="signup-modal__desc">
                 Welcome to MsgShield, <strong>{formData.username}</strong>.
-                You can now verify bank messages.
+                Redirecting you to the Validator...
               </p>
             </div>
           )}
@@ -421,11 +412,7 @@ export default function SignupModal({ isOpen, onClose }) {
             </button>
           )}
 
-          {submitResult === 'success' && (
-            <button type="button" className="signup-modal__btn signup-modal__btn--next" onClick={onClose}>
-              Get Started →
-            </button>
-          )}
+
 
           {submitResult === 'error' && (
             <button
