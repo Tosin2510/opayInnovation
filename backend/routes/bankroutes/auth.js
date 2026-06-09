@@ -42,7 +42,7 @@ bankRouter.post("/login", async (req, res) => {
 });
 
 // Get all banks
-router.get("/get", async (req, res) => {
+bankRouter.get("/get", async (req, res) => {
   try {
     const banks = await Bank.find();
 
