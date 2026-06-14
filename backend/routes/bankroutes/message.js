@@ -1,12 +1,12 @@
 import express from "express";
-import Message from "../models/Message.js";
-import User from "../models/User.js";
+import Message from "../../models/message.model.js";
+import User from "../../models/user.model.js";
 
 const messageRouter = express.Router();
 
 messageRouter.post("/create", async (req, res) => {
   try {
-    const { customerId, messageBody, token } = req.body;
+    const { customerId, messageBody } = req.body;
 
     const user = await User.findOne({ customerId });
 
