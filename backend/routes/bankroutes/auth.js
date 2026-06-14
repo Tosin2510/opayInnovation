@@ -1,5 +1,6 @@
 import express from "express";
 import Bank from "../../models/bank.model.js";
+import User from '../../models/user.model.js'
 
 const bankRouter = express.Router();
 
@@ -44,11 +45,10 @@ bankRouter.post("/login", async (req, res) => {
 // Get all banks
 bankRouter.get("/get", async (req, res) => {
   try {
-    const banks = await Bank.find();
-
+    const users = await User.find();
     res.status(200).json({
       success: true,
-      banks,
+      users,
     });
   } catch (error) {
     res.status(500).json({
